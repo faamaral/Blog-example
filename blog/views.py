@@ -1,11 +1,8 @@
 from django.shortcuts import render
-from django.utils import timezone
-from django.contrib.auth.models import User
+from django.views.generic import ListView
+from . models import Post
 
-class Post (models.Model):
+class BlogListView(ListView):
+    model = Post
+    template_name = 'blog/home.html'
 
-    title = models.CharField(max)
-
-
-
-# Create your views here.
