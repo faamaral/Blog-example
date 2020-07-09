@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.views.generic import ListView, DetailView, UpdateView, DeleteView
 from django.views.generic.edit import CreateView
 from . models import Post
+from . forms import Postform
 
 class BlogListView(ListView):
     model = Post
@@ -19,8 +20,9 @@ class BlogCreateView(SuccessMessageMixin,CreateView):
     model = Post
     template_name = 'blog/post_new.html'
     #fields = '__all__'
-    fields = ('title', 'content', 'author')
-    success_message = "%(field) - has sucessfully created!"
+    #fields = ('title', 'content', 'author')
+    form_class = Postform
+    success_message = "%(field)s - has sucessfully created!"
 
     def get_success_message(self, cleaned_data):
         return self.success_message % dict(
@@ -28,11 +30,25 @@ class BlogCreateView(SuccessMessageMixin,CreateView):
             field=self.object.title,
         )
 
+    def form_valid(self, form):
+        obj = form.save(commit=False)
+        obj.author = self.request.user
+        obj.save()
+        return super().form_valid(form)
+
+
 class BlogUpdateView(SuccessMessageMixin,UpdateView):
     model = Post
     template_name = 'blog/post_edit.html'
-    fields = ('title', 'content')
+    form_class = Postform
+    #fields = ('title', 'content')
     success_message = "%(field) - has sucessfully updated!"
+
+    def form_valid(self, form):
+        obj = form.save(commit=False)
+        obj.autor = self.request.user
+        obj.save()
+        return super().form_valid(form)
 
     def get_success_message(self, cleaned_data):
         return self.success_message % dict(

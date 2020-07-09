@@ -10,7 +10,7 @@
 {% endif %}
         <div class="post-entry">
             <h2>{{ object.title }}</h2>
-            <p>{{ object.content }} </p>
+            <p>{{ object.content|safe }} </p>
         </div>
         <a href="{{ object.get_absolute_url_update }}">Edit post</a><br>
         <a href="{{ object.get_absolute_url_delete }}">Delete post</a>

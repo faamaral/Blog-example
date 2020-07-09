@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'ckeditor',
+    'bootstrapform',
     'blog',
     'accounts',
 ]
@@ -56,7 +58,7 @@ ROOT_URLCONF = 'ex_blog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ["templates"],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -129,7 +131,7 @@ MEDIA_ROOT = 'media'
 
 STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
 
-STATICFILES_DIR = [
+STATICFILES_DIRS = [
     'statics'
 ]
 

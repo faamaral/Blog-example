@@ -1,26 +1,25 @@
 from django.contrib import admin
-from .models import Post
+from .models import Post, Category
+
+@admin.register(Category)
+class PostAdmin(admin.ModelAdmin):
+    list_display = ('name', 'created', 'published')
+    list_filter = ('name', 'created', 'published')
+    date_hierarchy = 'published'
+    search_fields = ('name',)
 
 #admin.site.register(Post)
 @admin.register(Post)
-
 class PostAdmin(admin.ModelAdmin):
     list_display = ('title','author','published','status')
     list_filter = ('status','published','created','author')
+    readonly_fields = ('show_image',)
     raw_id_fields = ('author',)
     date_hierarchy = ('published')
     search_fields = ('title','content')
     prepopulated_fields = {'slug':('title',)}
 
-# Register your models here.
+def show_img(self, obj):
+    return obj.view_image
 
-"""
-    title = models.CharField(max_length=250)
-    slug = models.SlugField(max_length=250)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
-    content = models.TextField()
-    published = models.DateTimeField(default=timezone.now)
-    created = models.DateTimeField(auto_now_add=True)
-    changed = models.DateTimeField(auto_now=True)
-    status = models.CharField(max_length=10, choices=STATUS, default='draft')
-"""
+show_img.short_description = "Picture has been cadastred"
