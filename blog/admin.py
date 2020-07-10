@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post, Category
+from . models import Post, Category
 
 @admin.register(Category)
 class PostAdmin(admin.ModelAdmin):
@@ -13,13 +13,13 @@ class PostAdmin(admin.ModelAdmin):
 class PostAdmin(admin.ModelAdmin):
     list_display = ('title','author','published','status')
     list_filter = ('status','published','created','author')
-    readonly_fields = ('show_image',)
+    readonly_fields = ('show_img',)
     raw_id_fields = ('author',)
     date_hierarchy = ('published')
     search_fields = ('title','content')
     prepopulated_fields = {'slug':('title',)}
 
-def show_img(self, obj):
-    return obj.view_image
+    def show_img(self, obj):
+        return obj.view_image
 
-show_img.short_description = "Picture has been cadastred"
+    show_img.short_description = "Picture has been cadastred"

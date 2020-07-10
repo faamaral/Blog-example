@@ -1,5 +1,26 @@
 {% extends 'base.html' %}
-{% block title %} Blog - Detail {% endblock title %}
+{% load static %}
+{% block title %} Detalhes {% endblock title %}
+{% block header %}
+<!-- Page Header -->
+
+{% if object.image %}
+<header class="masthead" style="background-image: url({{ object.image.url }})">
+{% else %}
+<header class="masthead" style="background-image: url({% static 'img/home-bg.jpg' %})">
+{% endif %}
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1>{{ object.title }}</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+</header>
+{% endblock header %}
 {% block content %}
 {% if messages %}
     <ul class="messages">
@@ -9,9 +30,15 @@
     </ul>
 {% endif %}
         <div class="post-entry">
-            <h2>{{ object.title }}</h2>
+
             <p>{{ object.content|safe }} </p>
         </div>
-        <a href="{{ object.get_absolute_url_update }}">Edit post</a><br>
-        <a href="{{ object.get_absolute_url_delete }}">Delete post</a>
+        {% if request.user.is_authenticated %}
+        <div class="card" >
+            <div class="card-body">
+                <a href="{{ object.get_absolute_url_update }}" class="btn btn-primary">+ Editar Post </a>
+                <a href="{% url 'post_delete' object.pk %}" class="btn btn-danger"> Deletar Post </a>
+            </div>
+        </div>
+        {% endif %}
 {% endblock content %}

@@ -10,7 +10,7 @@ from django.utils.html import mark_safe
 
 class PublishedManager(models.Manager):
     def get_queryset(self):
-        return super(PublishedManager,self).get_queryset()\
+        return super(PublishedManager, self).get_queryset()\
                                                         .filter(status='published')
 
 
@@ -27,7 +27,8 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-class Post (models.Model):
+
+class Post(models.Model):
     STATUS = (
         ('draft', 'Draft'),
         ('published', 'Published'),
@@ -44,7 +45,6 @@ class Post (models.Model):
     changed = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10, choices=STATUS, default='draft')
 
-    
     objects = models.Manager()
     published1 = PublishedManager()
 
@@ -58,7 +58,7 @@ class Post (models.Model):
 
     @property
     def view_image(self):
-        return mark_safe('<img src="%s" width="400px" />'%self.imagem.url)
+        return mark_safe('<img src="%s" width="400px" />'%self.image.url)
         view_image.short_description = "Picture has been registered" 
         view_image.allow_tags = True 
     
