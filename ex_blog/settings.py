@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'blog',
     'accounts',
     'social',
+    'contact',
 ]
 
 MIDDLEWARE = [
@@ -130,6 +131,11 @@ LOGOUT_REDIRECT_URL = 'home'
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = 'media'
+
+EMAIL_HOST = 'smtp.mailtrap.io'
+EMAIL_HOST_USER = 'f3cf87b3a8243e'
+EMAIL_HOST_PASSWORD = 'f645b8c774ec15'
+EMAIL_PORT = '2525'
 
 STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
 
