@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.utils.text import slugify
 from django.db.models.signals import post_save
 from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 from django.utils.html import mark_safe
 
 class PublishedManager(models.Manager):
@@ -39,7 +40,8 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.ManyToManyField(Category, related_name="get_posts")
     image = models.ImageField(upload_to="blog", blank=True, null=True)
-    content = RichTextField(verbose_name="Conteudo")
+    sumary = RichTextField(verbose_name="Resumo")
+    content = RichTextUploadingField(verbose_name="Conteudo")
     published = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     changed = models.DateTimeField(auto_now=True)

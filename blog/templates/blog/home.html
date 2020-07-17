@@ -10,8 +10,8 @@
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="site-heading">
-            <h1>Curso de Django</h1>
-            <span class="subheading">Blog Desenvolvido com Django </span>
+            <h1>Não sei o que vou colocar aqui</h1>
+            <span class="subheading">Procurando ideias de como isso aqui vai funcionar lkkkkk </span>
           </div>
         </div>
       </div>
@@ -27,12 +27,12 @@
        {{ post.title }}
       </h2>
       <h3 class="post-subtitle">
-            {{ post.content|safe|truncatechars:"200" }}
+            {{ post.sumary |safe }}
       </h3>
     </a>
-    <p class="post-meta">Posted by
-      <a href="#">Start Bootstrap</a>
-      on July 8, 2019</p>
+    <p class="post-meta">Por:
+      <a href="">{{post.author}}</a>
+      {{post.published}}</p>
 </div>
 <hr>
 {% endfor %}

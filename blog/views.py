@@ -53,7 +53,7 @@ class BlogUpdateView(LoginRequiredMixin,SuccessMessageMixin,UpdateView):
 
     def form_valid(self, form):
         obj = form.save(commit=False)
-        obj.autor = self.request.user
+        obj.author = self.request.user
         obj.save()
         return super().form_valid(form)
 
